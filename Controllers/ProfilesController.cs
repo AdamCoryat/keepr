@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
-using Keepr.Models;
-using Keepr.Services;
+using keepr.Models;
+using keepr.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Keepr.Controllers
+namespace keepr.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]

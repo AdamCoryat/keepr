@@ -1,4 +1,4 @@
-using Keepr.Models;
+using keepr.Models;
 
 namespace keepr.Models
 {

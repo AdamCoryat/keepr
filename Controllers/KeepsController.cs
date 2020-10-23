@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
 using keepr.Models;
 using keepr.Services;
-using Keepr.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,6 +40,19 @@ namespace keepr.Controllers
       {
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
         return Ok(_ks.GetById(userInfo?.Id, id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+    [HttpGet("{id}")]
+    public async Task<ActionResult<IEnumerable<Keep>>> Get(string id)
+    {
+      try
+      {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_ks.GetByProfileId(userInfo?.Id, id));
       }
       catch (Exception e)
       {

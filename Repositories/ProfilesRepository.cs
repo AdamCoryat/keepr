@@ -1,8 +1,8 @@
 using System.Data;
-using Keepr.Models;
 using Dapper;
+using keepr.Models;
 
-namespace Keepr.Repositories
+namespace keepr.Repositories
 {
   public class ProfilesRepository
   {

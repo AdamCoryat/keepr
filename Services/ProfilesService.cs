@@ -1,7 +1,7 @@
-using Keepr.Models;
-using Keepr.Repositories;
+using keepr.Models;
+using keepr.Repositories;
 
-namespace Keepr.Services
+namespace keepr.Services
 {
   public class ProfilesService
   {
