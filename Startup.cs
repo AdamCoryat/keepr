@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Data;
 using CodeWorks.Auth0Provider;
+using keepr.Repositories;
+using keepr.Services;
 using Keepr.Repositories;
 using Keepr.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -57,6 +59,15 @@ namespace Keepr
 
       services.AddTransient<ProfilesService>();
       services.AddTransient<ProfilesRepository>();
+
+      services.AddTransient<KeepsService>();
+      services.AddTransient<KeepsRepository>();
+
+      services.AddTransient<VaultsService>();
+      services.AddTransient<VaultsRepository>();
+
+      services.AddTransient<VaultKeepsService>();
+      services.AddTransient<VaultKeepsRepository>();
     }
 
     private IDbConnection CreateDbConnection()

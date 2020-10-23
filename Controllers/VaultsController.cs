@@ -1,7 +1,17 @@
+using keepr.Services;
+using Microsoft.AspNetCore.Mvc;
+
 namespace keepr.Controllers
 {
-    public class VaultsController
+    [ApiController]
+    [Route("/api/[controller]")]
+    public class VaultsController : ControllerBase
     {
-        
+        private readonly VaultsService _vs;
+
+    public VaultsController(VaultsService vs)
+    {
+      _vs = vs;
     }
+  }
 }
