@@ -42,17 +42,35 @@ namespace keepr.Repositories
 
      internal int Create(Keep newKeep)
     {
-      throw new NotImplementedException();
+      string sql = @"
+      INSERT INTO Keeps
+      (creatorId, name, description, img, views, shares, keeps)
+      VALUES
+      (@CreatorId, @Name, @Description, @Img, @Views, @Shares, @Keeps);
+      SELECT LAST_INSERT_ID();";
+    return _db.ExecuteScalar<int>(sql, newKeep);
     }
 
-    internal object Edit(Keep editKeep)
+    internal Keep Edit(Keep editKeep)
     {
-      throw new NotImplementedException();
+     string sql = @"
+        UPDATE keeps
+        SET
+        name = @Name,
+        description = @Description,
+        img = @Img,
+        views = @Views,
+        shares = @Shares,
+        keeps = @Keeps
+        WHERE id = @Id;";
+        _db.Execute(sql, editKeep);
+        return editKeep;
     }
 
      internal void Delete(int id)
     {
-      throw new NotImplementedException();
+      string sql = "DELETE FROM keeps WHERE id = @id";
+      _db.Execute(sql, new {id});
     }
    
   }
