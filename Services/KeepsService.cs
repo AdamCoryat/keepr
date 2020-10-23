@@ -33,6 +33,16 @@ namespace keepr.Services
       return data;
     }
 
+    internal object GetByProfileId(string userId, string profileId)
+    {
+      IEnumerable<Keep> keeps = _repo.GetByProfileId(profileId);
+      if(keeps == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      return keeps;
+    }
+
     internal Keep Create(Keep newKeep)
     {
       newKeep.Id = _repo.Create(newKeep);
@@ -55,6 +65,8 @@ namespace keepr.Services
       editKeep.Img = editKeep.Img == null ? data.Img : editKeep.Img;
       return _repo.Edit(editKeep);
     }
+
+    
 
     internal object Delete(int id, string creatorId)
     {

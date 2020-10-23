@@ -1,4 +1,4 @@
-namespace Keepr.Models
+namespace keepr.Models
 {
   public class Profile
   {
