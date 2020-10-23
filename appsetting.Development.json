@@ -1,0 +1,18 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "DB": {
+    "gearhost": "server=den1.mysql6.gear.host;port=3306;database=keepr1987;user id=keepr1987;password=Ln1O0ID-O7?X"
+  },
+  "Auth0": {
+    "Domain": "dev-tunnelvision77.us.auth0.com",
+    "Audience": "https://keepr.com",
+    "ClientId": "VhU4Lbj41bLEc94i2kSeXsG8AM9C3Si2"
+  }
+}
