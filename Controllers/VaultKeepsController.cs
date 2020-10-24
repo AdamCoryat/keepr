@@ -27,7 +27,7 @@ namespace Keepr.Controllers
       {
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
         newVaultKeep.CreatorId = userInfo.Id;
-        _vks.Create(userInfo, newVaultKeep);
+         _vks.Create(userInfo, newVaultKeep);
         return Ok("Success!");
       }
       catch (Exception e)

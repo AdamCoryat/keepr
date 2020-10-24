@@ -37,10 +37,11 @@ namespace Keepr.Controllers
   } 
 
   [HttpGet("{id}/keeps")]
-  public ActionResult<IEnumerable<KeepVaultKeepViewModel>> GetKeepsByVaultId(int id)
+  public async Task<ActionResult<IEnumerable<KeepVaultKeepViewModel>>> GetKeepsByVaultId(int id)
   {
     try
     {
+      Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
       return Ok(_ks.GetKeepsByVaultId(id));
     }
     catch (Exception e)

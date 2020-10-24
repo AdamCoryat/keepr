@@ -79,7 +79,7 @@ namespace Keepr.Services
       {
         throw new Exception("Denied Invalid Permissions");
       }
-      _repo.Delete(id);
+       _repo.Delete(id);
       return "Successfully Deleted!";
     }
   }

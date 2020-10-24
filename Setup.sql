@@ -9,7 +9,8 @@
 --   PRIMARY KEY(id)
 -- )
 
--- SELECT * FROM profiles
+-- SELECT * FROM vaultkeeps
+-- DROP TABLE keeps
 
 -- CREATE TABLE keeps
 -- (

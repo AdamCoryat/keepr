@@ -7,10 +7,17 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     profile: {},
+    keeps: [],
+    vaults: [],
+    profileVaults: [],
+    activeKeep: {},
   },
   mutations: {
     setProfile(state, profile) {
       state.profile = profile;
+    },
+    setResource(state, payload) {
+      state[payload.resource] = payload.data;
     },
   },
   actions: {
@@ -22,5 +29,60 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+
+    //SECTION Array Methods
+    async getResource({ commit }, payload) {
+      try {
+        let res = await api.get(payload.path);
+        commit("setResource", { data: res.data, resource: payload.resource });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async createBug({ dispatch }, payload) {
+      try {
+        let res = await api.post(payload.path, payload.data);
+        dispatch("getResource", {
+          path: "bugs/" + res.data.id,
+          resource: payload.resource,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async create({ dispatch }, payload) {
+      try {
+        let res = await api.post(payload.path, payload.data);
+        dispatch("getResource", {
+          path: payload.getPath,
+          resource: payload.resource,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async edit({ dispatch }, payload) {
+      try {
+        await api.put(payload.path, payload.data);
+        dispatch("getResource", {
+          path: payload.getPath,
+          resource: payload.resource,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async delete({ dispatch }, payload) {
+      try {
+        await api.delete(payload.deletePath);
+        dispatch("getResource", {
+          path: payload.path,
+          resource: payload.resource,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    //!SECTION Array Methods
   },
 });
