@@ -35,12 +35,14 @@ namespace Keepr.Repositories
       p.*
       FROM keeps k
       JOIN profiles p on k.creatorId = p.id
-      WHERE k.id = @id";
+      WHERE k.id = @id LIMIT 1";
       
       return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => {keep.Creator = profile; return keep;}, new {id}, splitOn: "id").FirstOrDefault();
     }
 
-     internal IEnumerable<Keep> GetKeepsByProfileId(string profileId)
+    
+
+    internal IEnumerable<Keep> GetKeepsByProfileId(string profileId)
     {
       string sql = @"
       SELECT
@@ -50,6 +52,17 @@ namespace Keepr.Repositories
       JOIN profiles p on k.creatorId = p.id
       WHERE k.creatorId = @profileId";
       return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => {keep.Creator = profile; return keep;}, new {profileId}, splitOn: "id");
+    }
+    internal IEnumerable<KeepVaultKeepViewModel> GetKeepsByVaultId(int id)
+    {
+      string sql = @"
+      SELECT
+      k.*,
+      v.id AS VaultId
+      FROM vaultkeeps v
+      JOIN keeps k ON k.id = v.keepId
+      WHERE vaultId = @id"; 
+      return _db.Query<KeepVaultKeepViewModel>(sql, new {id} );
     }
 
      internal int Create(Keep newKeep)
@@ -81,7 +94,7 @@ namespace Keepr.Repositories
 
      internal void Delete(int id)
     {
-      string sql = "DELETE FROM keeps WHERE id = @id";
+      string sql = "DELETE FROM keeps WHERE id = @id LIMIT 1";
       _db.Execute(sql, new {id});
     }
    

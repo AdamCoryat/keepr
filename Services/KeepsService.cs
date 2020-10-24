@@ -38,6 +38,10 @@ namespace Keepr.Services
       }
       return keeps;
     }
+    internal IEnumerable<KeepVaultKeepViewModel> GetKeepsByVaultId(int id)
+    {
+      return _repo.GetKeepsByVaultId(id);
+    }
 
     internal Keep Create(Keep newKeep)
     {

@@ -13,11 +13,13 @@ namespace Keepr.Controllers
     [Route("/api/[controller]")]
     public class VaultsController : ControllerBase
     {
-        private readonly VaultsService _vs;
+      private readonly VaultsService _vs;
+      private readonly KeepsService _ks;
 
-    public VaultsController(VaultsService vs)
+    public VaultsController(VaultsService vs, KeepsService ks)
     {
       _vs = vs;
+      _ks = ks;
     }
 
   [HttpGet("{id}")]
@@ -34,6 +36,18 @@ namespace Keepr.Controllers
     }
   } 
 
+  [HttpGet("{id}/keeps")]
+  public ActionResult<IEnumerable<KeepVaultKeepViewModel>> GetKeepsByVaultId(int id)
+  {
+    try
+    {
+      return Ok(_ks.GetKeepsByVaultId(id));
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
   [HttpPost]
   [Authorize]
   public async Task<ActionResult<Vault>> Post([FromBody] Vault newVault)

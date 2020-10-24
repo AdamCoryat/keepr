@@ -1,4 +1,7 @@
+using System;
 using System.Data;
+using Dapper;
+using Keepr.Models;
 
 namespace Keepr.Repositories
 {
@@ -9,6 +12,28 @@ namespace Keepr.Repositories
     public VaultKeepsRepository(IDbConnection db)
     {
       _db = db;
+    }
+
+    internal void Create(VaultKeep newVaultKeep)
+    {
+      string sql = @"
+      INSERT INTO vaultkeeps
+      (creatorId, vaultId, keepId)
+      VALUES
+      (@CreatorId, @VaultId, @KeepId);";
+      _db.Execute(sql, newVaultKeep);
+    }
+
+    internal VaultKeep GetById(int id)
+    {
+      string sql = "SELECT * FROM vaultkeeps WHERE id = @id LIMIT 1;";
+      return _db.QueryFirstOrDefault<VaultKeep>(sql, new {id});
+    }
+
+    internal void Delete(int id)
+    {
+      string sql = "DELETE FROM vaultkeeps WHERE id = @id LIMIT 1;";
+      _db.Execute(sql, new {id});
     }
   }
 }
