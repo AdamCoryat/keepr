@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using keepr.Models;
-using keepr.Repositories;
+using Keepr.Models;
+using Keepr.Repositories;
 
-namespace keepr.Services
+namespace Keepr.Services
 {
     public class KeepsService
     {
@@ -19,23 +19,19 @@ namespace keepr.Services
       return _repo.GetAll();
     }
 
-    internal object GetById(string creatorId, int id)
+    internal Keep GetById(int id)
     {
       Keep data = _repo.GetById(id);
       if(data == null)
       {
         throw new Exception("Invalid Id");
       }
-      if(data.CreatorId != creatorId)
-      {
-        throw new Exception("Denied Invalid Permissions");
-      }
       return data;
     }
 
-    internal object GetByProfileId(string userId, string profileId)
+    internal IEnumerable<Keep> GetKeepsByProfileId(string userId, string profileId)
     {
-      IEnumerable<Keep> keeps = _repo.GetByProfileId(profileId);
+      IEnumerable<Keep> keeps = _repo.GetKeepsByProfileId(profileId);
       if(keeps == null)
       {
         throw new Exception("Invalid Id");

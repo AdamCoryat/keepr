@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.Data;
 using CodeWorks.Auth0Provider;
-using keepr.Repositories;
-using keepr.Services;
-using keepr.Repositories;
-using keepr.Services;
+using Keepr.Repositories;
+using Keepr.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MySqlConnector;
 
-namespace keepr
+namespace Keepr
 {
   public class Startup
   {

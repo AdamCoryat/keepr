@@ -1,7 +1,7 @@
-using keepr.Services;
+using Keepr.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace keepr.Controllers
+namespace Keepr.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]

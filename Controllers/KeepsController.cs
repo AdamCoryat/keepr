@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
-using keepr.Models;
-using keepr.Services;
+using Keepr.Models;
+using Keepr.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace keepr.Controllers
+namespace Keepr.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
@@ -34,12 +34,11 @@ namespace keepr.Controllers
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<IEnumerable<Keep>>> Get(int id)
+    public  ActionResult<IEnumerable<Keep>> Get(int id)
     {
       try
       {
-        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-        return Ok(_ks.GetById(userInfo?.Id, id));
+        return Ok(_ks.GetById(id));
       }
       catch (Exception e)
       {

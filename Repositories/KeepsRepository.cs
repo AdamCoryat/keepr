@@ -3,20 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Dapper;
-using keepr.Models;
+using Keepr.Models;
 
-namespace keepr.Repositories
+namespace Keepr.Repositories
 {
     public class KeepsRepository
     {
       private readonly IDbConnection _db;
-
-      private readonly string populateCreator = @"
-      SELECT
-      k.*,
-      p.*
-      FROM keeps k
-      JOIN profiles p on k.creatorId = p.id";
 
     public KeepsRepository(IDbConnection db)
     {
@@ -25,7 +18,12 @@ namespace keepr.Repositories
 
     internal IEnumerable<Keep> GetAll()
     {
-      string sql = populateCreator;
+      string sql = @"
+      SELECT
+      k.*,
+      p.*
+      FROM keeps k
+      JOIN profiles p on k.creatorId = p.id";
       return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => {keep.Creator = profile; return keep;}, splitOn: "id");
     }
 
@@ -42,7 +40,7 @@ namespace keepr.Repositories
       return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => {keep.Creator = profile; return keep;}, new {id}, splitOn: "id").FirstOrDefault();
     }
 
-     internal IEnumerable<Keep> GetByProfileId(string profileId)
+     internal IEnumerable<Keep> GetKeepsByProfileId(string profileId)
     {
       string sql = @"
       SELECT

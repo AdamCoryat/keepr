@@ -1,6 +1,10 @@
-using keepr.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Keepr.Models;
+using Keepr.Repositories;
 
-namespace keepr.Services
+namespace Keepr.Services
 {
     public class VaultsService
     {
@@ -10,5 +14,47 @@ namespace keepr.Services
     {
       _repo = repo;
     }
+
+    internal Vault GetById(string userId, int id)
+    {
+      Vault data = _repo.GetById(id);
+      if(data == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      if(data.CreatorId != userId && data.IsPrivate == true)
+      {
+        throw new Exception("Denied Invalid Permissions");
+      }
+      return data;
+    }
+     internal IEnumerable<Vault> GetVaultsByProfileId(string userId, string profileId)
+    {
+      IEnumerable<Vault> vaults = _repo.GetVaultsByProfileId(profileId);
+      return vaults.ToList().FindAll(v => v.CreatorId == userId || !v.IsPrivate);
+    }
+
+    internal Vault Create(Vault newVault)
+    {
+      newVault.Id = _repo.Create(newVault);
+      return newVault;
+    }
+
+    internal object Delete(int id, string creatorId)
+    {
+      Vault data = _repo.GetById(id);
+      if(data == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      if(data.CreatorId != creatorId)
+      {
+        throw new Exception("Denied Invalid Permissions");
+      }
+      _repo.Delete(id);
+      return "Successfully Deleted!";
+    }
+
+   
   }
 }

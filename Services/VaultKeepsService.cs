@@ -1,6 +1,6 @@
-using keepr.Repositories;
+using Keepr.Repositories;
 
-namespace keepr.Services
+namespace Keepr.Services
 {
     public class VaultKeepsService
     {

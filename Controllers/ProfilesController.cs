@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
-using keepr.Models;
-using keepr.Services;
+using Keepr.Models;
+using Keepr.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace keepr.Controllers
+namespace Keepr.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
@@ -15,10 +15,12 @@ namespace keepr.Controllers
   {
     private readonly ProfilesService _ps;
     private readonly KeepsService _ks;
-    public ProfilesController(ProfilesService ps, KeepsService ks)
+    private readonly VaultsService _vs;
+    public ProfilesController(ProfilesService ps, KeepsService ks, VaultsService vs)
     {
       _ps = ps;
       _ks = ks;
+      _vs = vs;
     }
 
 
@@ -37,12 +39,25 @@ namespace keepr.Controllers
       }
     }
     [HttpGet("{id}/keeps")]
-    public async Task<ActionResult<IEnumerable<Keep>>> GetByProfileId(string id)
+    public async Task<ActionResult<IEnumerable<Keep>>> GetKeepsByProfileId(string id)
     {
       try
       {
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-        return Ok(_ks.GetByProfileId(userInfo?.Id, id));
+        return Ok(_ks.GetKeepsByProfileId(userInfo?.Id, id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+     [HttpGet("{id}/vaults")]
+    public async Task<ActionResult<IEnumerable<Keep>>> GetVaultsByProfileId(string id)
+    {
+      try
+      {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_vs.GetVaultsByProfileId(userInfo?.Id, id));
       }
       catch (Exception e)
       {

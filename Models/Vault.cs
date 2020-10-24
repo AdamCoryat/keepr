@@ -1,6 +1,6 @@
-using keepr.Models;
+using Keepr.Models;
 
-namespace keepr.Models
+namespace Keepr.Models
 {
     public class Vault
     {
