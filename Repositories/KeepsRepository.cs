@@ -12,10 +12,11 @@ namespace keepr.Repositories
       private readonly IDbConnection _db;
 
       private readonly string populateCreator = @"
-      keep.*,
-      profile.*
-      FROM keeps keep
-      JOIN profiles profile on keep.creatorId = profile.id";
+      SELECT
+      k.*,
+      p.*
+      FROM keeps k
+      JOIN profiles p on k.creatorId = p.id";
 
     public KeepsRepository(IDbConnection db)
     {
@@ -30,14 +31,27 @@ namespace keepr.Repositories
 
     internal Keep GetById(int id)
     {
-      string sql = populateCreator + "WHERE keep.id = @id";
-      return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => {keep.Creator = profile; return keep;}, splitOn: "id").FirstOrDefault();
+      string sql = @"
+      SELECT
+      k.*,
+      p.*
+      FROM keeps k
+      JOIN profiles p on k.creatorId = p.id
+      WHERE k.id = @id";
+      
+      return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => {keep.Creator = profile; return keep;}, new {id}, splitOn: "id").FirstOrDefault();
     }
 
      internal IEnumerable<Keep> GetByProfileId(string profileId)
     {
-      string sql = populateCreator + "WHERE creatorId = @queryProfileId";
-      return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => {keep.Creator = profile; return keep;}, splitOn: "id");
+      string sql = @"
+      SELECT
+      k.*,
+      p.*
+      FROM keeps k
+      JOIN profiles p on k.creatorId = p.id
+      WHERE k.creatorId = @profileId";
+      return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => {keep.Creator = profile; return keep;}, new {profileId}, splitOn: "id");
     }
 
      internal int Create(Keep newKeep)

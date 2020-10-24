@@ -46,20 +46,7 @@ namespace keepr.Controllers
         return BadRequest(e.Message);
       }
     }
-    [HttpGet("{id}")]
-    public async Task<ActionResult<IEnumerable<Keep>>> Get(string id)
-    {
-      try
-      {
-        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-        return Ok(_ks.GetByProfileId(userInfo?.Id, id));
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
-
+  
     [HttpPost]
     [Authorize]
     public async Task<ActionResult<Keep>> Post([FromBody] Keep newKeep)
@@ -94,7 +81,7 @@ namespace keepr.Controllers
         return BadRequest(e.Message);
       }
     }
-    [HttpDelete]
+    [HttpDelete("{id}")]
     [Authorize]
     public async Task<ActionResult<string>> Delete(int id)
     {
