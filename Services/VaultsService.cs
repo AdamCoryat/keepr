@@ -15,7 +15,7 @@ namespace Keepr.Services
       _repo = repo;
     }
 
-    internal Vault GetById(string userId, int id)
+    internal Vault GetById(int id)
     {
       Vault data = _repo.GetById(id);
       if(data.IsPrivate == true || data == null)
