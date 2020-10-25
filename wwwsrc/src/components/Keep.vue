@@ -5,41 +5,43 @@
         <img class="card-img-top" :src="keep.img" alt="" />
         <div class="card-body">
           <h4 class="card-title">{{ keep.name }}</h4>
-          <p class="card-text">{{ keep.creator.email }}</p>
           <button @click="deleteKeep(keep.id)">delete</button>
+          <img :src="keep.creator.picture" />
         </div>
       </div>
     </a>
     <section id="keep-modal">
-      <form-modal :id="modalId">
-        <template v-slot:header>
-          <div class="row">
-            <div class="col-12">
-              <h1>{{ keep.name }}</h1>
-            </div>
-          </div>
-        </template>
+      <details-modal :id="modalId">
         <template v-slot:body>
-          <div class="card col-12">
-            <img class="card-img-top" :src="keep.img" alt="" />
-            <div class="card-body">
-              <h4 class="card-title">{{ keep.name }}</h4>
+          <div class="row modal-width">
+            <div class="col-4">
+              <img :src="keep.img" class="card-img" />
+            </div>
+            <div class="col-8">
+              <div class="card-body">
+                <p>
+                  Shares:{{ keep.shares }},Views:{{ keep.views }},Keeps:{{
+                    keep.keeps
+                  }}
+                </p>
+                <hr />
+                <h5 class="card-title">{{ keep.name }}</h5>
+                <br />
+                <p class="card-text">{{ keep.description }}</p>
+                <hr />
 
-              <p class="card-text">Creator:{{ keep.creator.email }}</p>
-              <p class="card-text">Shares:{{ keep.shares }}</p>
-              <p class="card-text">Keeps:{{ keep.keeps }}</p>
-              <p class="card-text">Views:{{ keep.views }}</p>
-              <button @click="deleteKeep(keep.id)">delete</button>
+                <p class="card-text">{{ keep.creator.name }}</p>
+              </div>
             </div>
           </div>
         </template>
-      </form-modal>
+      </details-modal>
     </section>
   </section>
 </template>
 
 <script>
-import FormModal from "../components/FormModal.vue";
+import DetailsModal from "../components/DetailsModal.vue";
 export default {
   name: "keep",
   data() {
@@ -67,9 +69,16 @@ export default {
     },
   },
   components: {
-    FormModal,
+    DetailsModal,
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.modal-img {
+  width: 40vw;
+}
+.modal-width {
+  width: 70vw;
+}
+</style>

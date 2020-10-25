@@ -40,7 +40,6 @@
                   placeholder="Description"
                   v-model="newKeep.description"
                   required
-                  class="text-light"
                 />
                 <br />
                 <input
@@ -48,7 +47,6 @@
                   placeholder="Image"
                   v-model="newKeep.img"
                   required
-                  class="text-light"
                 />
               </form>
             </div>

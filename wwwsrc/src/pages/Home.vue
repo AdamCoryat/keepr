@@ -1,6 +1,6 @@
 <template>
-  <main class="home container-fluid">
-    <section class="row">
+  <main class="home cards container-fluid">
+    <section class="card-columns row justify-content-center">
       <keep v-for="keep in keeps" :key="keep.id" :keep="keep" />
     </section>
     <section id="keep-modals"></section>
@@ -9,7 +9,6 @@
 
 <script>
 import Keep from "../components/Keep.vue";
-
 export default {
   name: "home",
   mounted() {
@@ -29,9 +28,12 @@ export default {
   methods: {},
   components: {
     Keep,
-    DetailsModal,
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.cards {
+  display: inline-block;
+}
+</style>

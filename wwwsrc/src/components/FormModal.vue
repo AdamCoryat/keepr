@@ -2,7 +2,7 @@
   <main class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="container modal-content">
-        <div class="row modal-header text-center">
+        <div class="modal-header text-center">
           <slot name="header"></slot>
           <i
             type="button"
