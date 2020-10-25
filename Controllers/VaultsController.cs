@@ -41,7 +41,14 @@ namespace Keepr.Controllers
     try
     {
       Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-      return Ok(_ks.GetKeepsByVaultId(id));
+      IEnumerable<Keep> keeps = _ks.GetKeepsByVaultId(id);
+     foreach (Keep k in keeps){
+       k.Creator = userInfo;
+     }
+     return Ok(keeps);
+     {
+         
+     }
     }
     catch (Exception e)
     {

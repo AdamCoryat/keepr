@@ -10,6 +10,7 @@ export default new Vuex.Store({
     activeProfile: {},
     activeVault: {},
     keeps: [],
+    vaultKeeps: [],
     vaults: [],
     profileVaults: [],
     activeKeep: {},

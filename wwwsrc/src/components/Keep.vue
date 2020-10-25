@@ -5,7 +5,7 @@
         <img class="card-img-top" :src="keep.img" alt="" />
         <div class="card-body">
           <h4 class="card-title">{{ keep.name }}</h4>
-          <button @click="deleteKeep(keep.id)">delete</button>
+          <button v-on:click.stop.prevent="deleteKeep(keep.id)">delete</button>
           <a v-on:click.stop.prevent="viewProfile">
             <img :src="keep.creator.picture" />
           </a>
@@ -26,6 +26,20 @@
                     keep.keeps
                   }}
                 </p>
+                <div>
+                  <select
+                    v-model="newVaultKeep.vaultId"
+                    @change="createVaultKeep()"
+                    class="custom-select"
+                  >
+                    <option
+                      :value="vault.id"
+                      v-for="vault in vaults"
+                      :key="vault.id"
+                      >{{ vault.name }}</option
+                    >
+                  </select>
+                </div>
                 <hr />
                 <h5 class="card-title">{{ keep.name }}</h5>
                 <br />
@@ -46,13 +60,18 @@ import DetailsModal from "../components/DetailsModal.vue";
 export default {
   name: "keep",
   data() {
-    return {};
+    return {
+      newVaultKeep: {},
+    };
   },
   mounted() {},
   props: {
     keep: {},
   },
   computed: {
+    vaults() {
+      return this.$store.state.vaults;
+    },
     keepId() {
       return "#a-" + this.keep.id.toString();
     },
@@ -72,6 +91,15 @@ export default {
       this.$router.push({
         name: "Profile",
         params: { Id: this.keep.creator.id },
+      });
+    },
+    createVaultKeep() {
+      this.newVaultKeep.keepId = this.keep.id;
+      this.$store.dispatch("create", {
+        getPath: "vaults/" + this.newVaultKeep.vaultId + "/keeps",
+        path: "vaultkeeps",
+        resource: "vaultKeeps",
+        data: this.newVaultKeep,
       });
     },
   },
