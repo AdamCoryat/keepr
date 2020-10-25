@@ -6,7 +6,9 @@
         <div class="card-body">
           <h4 class="card-title">{{ keep.name }}</h4>
           <button @click="deleteKeep(keep.id)">delete</button>
-          <img :src="keep.creator.picture" />
+          <a v-on:click.stop.prevent="viewProfile">
+            <img :src="keep.creator.picture" />
+          </a>
         </div>
       </div>
     </a>
@@ -29,7 +31,6 @@
                 <br />
                 <p class="card-text">{{ keep.description }}</p>
                 <hr />
-
                 <p class="card-text">{{ keep.creator.name }}</p>
               </div>
             </div>
@@ -65,6 +66,12 @@ export default {
         deletePath: "keeps/" + this.keep.id,
         resource: "keeps",
         path: "keeps",
+      });
+    },
+    viewProfile() {
+      this.$router.push({
+        name: "Profile",
+        params: { Id: this.keep.creator.id },
       });
     },
   },

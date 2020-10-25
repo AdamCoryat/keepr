@@ -77,7 +77,7 @@ You have been provided the following Figma to provide you the general layout. Wh
   - [X]Keep Creator name and avatar
   - [X]Keep Image
   - [X]Add to vault functionality
-- []All users have a public profile page
+- [X]All users have a public profile page
 - []The profile page adheres to mock:
   - []**Public** vaults
   - []**Private** vaults if it is their own page

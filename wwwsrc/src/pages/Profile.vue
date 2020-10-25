@@ -66,7 +66,12 @@
 import FormModal from "../components/FormModal.vue";
 export default {
   name: "profile",
-  mounted() {},
+  mounted() {
+    this.$store.dispatch("getResource", {
+      path: "profiles/" + this.$route.params.Id,
+      resource: "activeProfile",
+    });
+  },
   data() {
     return {
       newKeep: {},
@@ -74,7 +79,7 @@ export default {
   },
   computed: {
     profile() {
-      return this.$store.state.profile;
+      return this.$store.state.activeProfile;
     },
   },
   methods: {

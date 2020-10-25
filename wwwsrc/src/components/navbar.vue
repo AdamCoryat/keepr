@@ -5,7 +5,10 @@
         <h1 class="border border-primary">Home</h1>
       </div>
     </router-link>
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Profile' }">
+    <router-link
+      class="navbar-brand d-flex"
+      :to="{ name: 'Profile', params: { Id: this.profile.id } }"
+    >
       <div class="d-flex flex-column align-items-center">
         <h1 class="border border-primary">Profile</h1>
       </div>
@@ -42,6 +45,11 @@ import { getUserData } from "@bcwdev/auth0-vue";
 import { setBearer, resetBearer } from "../services/AxiosService";
 export default {
   name: "Navbar",
+  computed: {
+    profile() {
+      return this.$store.state.profile;
+    },
+  },
   methods: {
     async login() {
       await this.$auth.loginWithPopup();
@@ -53,6 +61,12 @@ export default {
     async logout() {
       resetBearer();
       await this.$auth.logout({ returnTo: window.location.origin });
+    },
+    viewProfile() {
+      this.$router.push({
+        name: "Profile",
+        params: { Id: this.profile.id },
+      });
     },
   },
 };
