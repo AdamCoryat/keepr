@@ -66,9 +66,7 @@ You have been provided the following Figma to provide you the general layout. Wh
 
 # Requirements
 
--[]`Keep` cards are displayed in accordance to mock -[X]Visitors can see all `keep`s (login not required)
--[]A `keep` card includes image, title, creator avatar - []Clicking on the creator avatar navigates to the creators profile page _(stop propagate)_
--[]Cards follow a mansonry layout _(bootstrap card columns OR masonry)_
+-[X]`Keep` cards are displayed in accordance to mock -[X]Visitors can see all `keep`s (login not required) -[X]A `keep` card includes image, title, creator avatar -[X]Clicking on the creator avatar navigates to the creators profile page _(stop propagate)_ -[X]Cards follow a mansonry layout _(bootstrap card columns OR masonry)_
 
 - [X]Clicking on a `keep` card opens the `keep` in a modal which adheres to mock
   - [X]Keep Count -[X]View Count
@@ -78,15 +76,15 @@ You have been provided the following Figma to provide you the general layout. Wh
   - [X]Keep Image
   - [X]Add to vault functionality
 - [X]All users have a public profile page
-- []The profile page adheres to mock:
-  - []**Public** vaults
-  - []**Private** vaults if it is their own page
-  - []Keeps created by that user
-  - []Total `keep`s count
-  - []Total public `vault`s count
-  - []The users name and avatar
-- []Each `vault` has its own route where users can view all of the `keeps` in the vault
-- []On the `vault` page, if the `vault` is private and not the active users the request fails
+- [X]The profile page adheres to mock:
+  - [X]**Public** vaults
+  - [X]**Private** vaults if it is their own page
+  - [X]Keeps created by that user
+  - [X]Total `keep`s count
+  - [X]Total public `vault`s count
+  - [X]The users name and avatar
+- [X]Each `vault` has its own route where users can view all of the `keeps` in the vault
+- [X]On the `vault` page, if the `vault` is private and not the active users the request fails
 - []From the `vault` page if the user is the creator they can remove `keep`s from the `vault`
 - []Anytime a `keep` is `kept in a vault` the keep count is incremented
 - [X]Users can Register, login and automatically authenticated on refresh
