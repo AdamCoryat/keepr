@@ -1,11 +1,17 @@
 <template>
-  <section class="keep col-3">
+  <main class="keep col-3">
     <a href="" data-toggle="modal" :data-target="keepId">
-      <div class="card m-2">
-        <img class="card-img-top" :src="keep.img" alt="" />
-        <div class="card-body">
-          <h4 class="card-title">{{ keep.name }}</h4>
-          <button v-on:click.stop.prevent="deleteKeep(keep.id)">delete</button>
+      <div
+        id="keep"
+        class="card neu-styling m-2 d-flex flex-wrap justify-content-end justify-content-between align-items-between"
+        v-bind:style="{ backgroundImage: 'url(' + this.keep.img + ')' }"
+      >
+        <div class="">
+          <h4>
+            {{ keep.name }}
+          </h4>
+        </div>
+        <div class="">
           <a v-on:click.stop.prevent="viewProfile">
             <img :src="keep.creator.picture" />
           </a>
@@ -26,6 +32,7 @@
                     keep.keeps
                   }}
                 </p>
+                <button @click="deleteKeep(keep.id)">delete</button>
                 <div>
                   <select
                     v-model="newVaultKeep.vaultId"
@@ -52,7 +59,7 @@
         </template>
       </details-modal>
     </section>
-  </section>
+  </main>
 </template>
 
 <script>
@@ -116,4 +123,19 @@ export default {
 .modal-width {
   width: 70vw;
 }
+.neu-styling {
+  box-shadow: 10px 10px 20px #acacad;
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  border-radius: 12px;
+  min-height: 50vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* .keep {
+  transition: 0.5s ease;
+}
+.keep:hover {
+  transform: scale(1.05);
+} */
 </style>

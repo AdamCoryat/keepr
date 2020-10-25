@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="bg-clr" id="app">
     <navbar />
     <router-view />
   </div>
@@ -15,7 +15,7 @@ export default {
     await onAuth();
     if (this.$auth.isAuthenticated) {
       setBearer(this.$auth.bearer);
-      this.$store.dispatch("getProfile")
+      this.$store.dispatch("getProfile");
       //NOTE if you want to do something everytime the user logs in, do so here
     }
   },
@@ -28,4 +28,8 @@ export default {
 @import "./assets/_variables.scss";
 @import "bootstrap";
 @import "./assets/_overrides.scss";
+.bg-clr {
+  background-color: #f7f7f8;
+  // background-image: linear-gradient(135deg, #fdfdfd 0%, #c6c9c9 100%);
+}
 </style>
