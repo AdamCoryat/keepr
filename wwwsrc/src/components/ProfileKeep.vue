@@ -1,8 +1,8 @@
 <template>
   <main class="profile-keep col-3">
-    <a href="" data-toggle="modal" :data-target="keepId">
+    <a href="" data-toggle="modal" :data-target="keepId" @click="addView">
       <div
-        id="keep"
+        id="profile-keep"
         class="card neu-styling m-2 d-flex flex-wrap justify-content-end justify-content-between align-items-between"
         v-bind:style="{ backgroundImage: 'url(' + this.keep.img + ')' }"
       >
@@ -13,7 +13,7 @@
         </div>
       </div>
     </a>
-    <section id="keep-modal">
+    <section id="profile-keep-modal">
       <details-modal :id="modalId">
         <template v-slot:body>
           <div class="row modal-width">
@@ -27,7 +27,9 @@
                     keep.keeps
                   }}
                 </p>
-                <button @click="deleteKeep(keep.id)">delete</button>
+                <button @click="deleteKeep(keep.id)" data-dismiss="modal">
+                  delete
+                </button>
                 <div>
                   <select
                     v-model="newVaultKeep.vaultId"
@@ -82,6 +84,15 @@ export default {
     },
   },
   methods: {
+    addView() {
+      this.keep.views++;
+      this.$store.dispatch("edit", {
+        getPath: "keeps",
+        path: "keeps/" + this.keep.id,
+        data: this.keep,
+        resource: "keeps",
+      });
+    },
     deleteKeep(id) {
       this.$store.dispatch("delete", {
         deletePath: "keeps/" + this.keep.id,
@@ -92,6 +103,13 @@ export default {
       $(".modal").hide();
     },
     createVaultKeep() {
+      this.keep.keeps++;
+      this.$store.dispatch("edit", {
+        getPath: "keeps",
+        path: "keeps/" + this.keep.id,
+        data: this.keep,
+        resource: "keeps",
+      });
       this.newVaultKeep.keepId = this.keep.id;
       this.$store.dispatch("create", {
         getPath: "vaults/" + this.newVaultKeep.vaultId + "/keeps",

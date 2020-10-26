@@ -1,6 +1,6 @@
 <template>
   <main class="profile-keep col-3">
-    <a href="" data-toggle="modal" :data-target="keepId">
+    <a href="" data-toggle="modal" :data-target="keepId" @click="addView">
       <div
         id="keep"
         class="card neu-styling m-2 d-flex flex-wrap justify-content-end justify-content-between align-items-between"
@@ -82,6 +82,15 @@ export default {
     },
   },
   methods: {
+    addView() {
+      this.keep.views++;
+      this.$store.dispatch("edit", {
+        getPath: "keeps",
+        path: "keeps/" + this.keep.id,
+        data: this.keep,
+        resource: "keeps",
+      });
+    },
     deleteVaultKeep(id) {
       this.$store.dispatch("delete", {
         deletePath: "vaultkeeps/" + this.keep.vaultId,

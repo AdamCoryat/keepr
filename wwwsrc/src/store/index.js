@@ -63,7 +63,6 @@ export default new Vuex.Store({
           path: payload.getPath,
           resource: payload.resource,
         });
-        ns.toast("Edited!", 2000, "success");
       } catch (error) {
         console.error(error);
       }

@@ -81,6 +81,7 @@
                 class="btn btn-primary"
                 type="submit"
                 @click="createVault"
+                data-dismiss="modal"
               >
                 Create
               </button>
@@ -119,7 +120,12 @@
               </form>
             </div>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" @click="createKeep">
+              <button
+                class="btn btn-primary"
+                type="submit"
+                @click="createKeep"
+                data-dismiss="modal"
+              >
                 Create
               </button>
             </div>
