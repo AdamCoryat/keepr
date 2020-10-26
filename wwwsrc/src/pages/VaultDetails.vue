@@ -6,20 +6,24 @@
         <p>Keeps: {{ keeps.length }}</p>
       </article>
     </section>
-    <section>
-      <keep v-for="keep in keeps" :key="keep.id" :keep="keep" />
+    <section class="row d-flex justify-content-center">
+      <profile-keep v-for="keep in keeps" :key="keep.id" :keep="keep" />
     </section>
   </main>
 </template>
 
 <script>
-import Keep from "../components/Keep.vue";
+import ProfileKeep from "../components/ProfileKeep.vue";
 export default {
   name: "vault-details",
   mounted() {
     this.$store.dispatch("getResource", {
       path: "vaults/" + this.$route.params.Id,
       resource: "activeVault",
+    });
+    this.$store.dispatch("getResource", {
+      path: "vaults/" + this.$route.params.Id + "/keeps",
+      resource: "vaultKeeps",
     });
   },
   data() {
@@ -39,16 +43,12 @@ export default {
   watch: {
     profile: function(userProfile) {
       if (userProfile.picture) {
-        this.$store.dispatch("getResource", {
-          path: "vaults/" + this.$route.params.Id + "/keeps",
-          resource: "vaultKeeps",
-        });
       }
     },
   },
   methods: {},
   components: {
-    Keep,
+    ProfileKeep,
   },
 };
 </script>

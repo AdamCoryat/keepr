@@ -41,7 +41,7 @@
         </h3>
       </article>
       <article class="row card-columns">
-        <keep v-for="keep in keeps" :key="keep.id" :keep="keep" />
+        <profile-keep v-for="keep in keeps" :key="keep.id" :keep="keep" />
       </article>
     </section>
 
@@ -128,7 +128,7 @@
 <script>
 import FormModal from "../components/FormModal.vue";
 import Vault from "../components/Vault.vue";
-import Keep from "../components/Keep.vue";
+import ProfileKeep from "../components/ProfileKeep.vue";
 export default {
   name: "profile",
   mounted() {
@@ -190,7 +190,7 @@ export default {
   components: {
     FormModal,
     Vault,
-    Keep,
+    ProfileKeep,
   },
 };
 </script>
