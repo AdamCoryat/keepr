@@ -15,12 +15,16 @@ namespace Keepr.Services
       _repo = repo;
     }
 
-    internal Vault GetById(int id)
+    internal Vault GetById(Profile userInfo, int id)
     {
       Vault data = _repo.GetById(id);
-      if(data.IsPrivate == true || data == null)
+      if(data.IsPrivate == true && data.CreatorId != userInfo.Id)
       {
-        throw new Exception("This Vault is private or does not exist");
+        throw new Exception("This Vault is private");
+      }
+      if(data == null)
+      {
+        throw new Exception("Invalid Id");
       }
       return data;
     }

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { api } from "../services/AxiosService.js";
+import ns from "../services/NotificationService.js";
 
 Vue.use(Vuex);
 
@@ -37,18 +38,8 @@ export default new Vuex.Store({
     async getResource({ commit }, payload) {
       try {
         let res = await api.get(payload.path);
+        console.log(res.data);
         commit("setResource", { data: res.data, resource: payload.resource });
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    async createBug({ dispatch }, payload) {
-      try {
-        let res = await api.post(payload.path, payload.data);
-        dispatch("getResource", {
-          path: "bugs/" + res.data.id,
-          resource: payload.resource,
-        });
       } catch (error) {
         console.error(error);
       }
@@ -60,6 +51,7 @@ export default new Vuex.Store({
           path: payload.getPath,
           resource: payload.resource,
         });
+        ns.toast("Created!", 2000, "success");
       } catch (error) {
         console.error(error);
       }
@@ -71,17 +63,20 @@ export default new Vuex.Store({
           path: payload.getPath,
           resource: payload.resource,
         });
+        ns.toast("Edited!", 2000, "success");
       } catch (error) {
         console.error(error);
       }
     },
     async delete({ dispatch }, payload) {
       try {
-        await api.delete(payload.deletePath);
+        if (await ns.confirmAction("do you want to delete?"))
+          await api.delete(payload.deletePath);
         dispatch("getResource", {
           path: payload.path,
           resource: payload.resource,
         });
+        ns.toast("Deleted!", 2000, "success");
       } catch (error) {
         console.error(error);
       }

@@ -27,7 +27,7 @@
                     keep.keeps
                   }}
                 </p>
-                <button @click="deleteKeep(keep.id)">delete</button>
+                <button @click="deleteVaultKeep(keep.vaultId)">delete</button>
                 <div>
                   <select
                     v-model="newVaultKeep.vaultId"
@@ -82,11 +82,11 @@ export default {
     },
   },
   methods: {
-    deleteKeep(id) {
+    deleteVaultKeep(id) {
       this.$store.dispatch("delete", {
-        deletePath: "keeps/" + this.keep.id,
-        resource: "keeps",
-        path: "keeps",
+        deletePath: "vaultkeeps/" + this.keep.vaultId,
+        resource: "vaultKeeps",
+        path: "vaults/" + this.$route.params.Id + "/keeps",
       });
       $(".modal-backdrop").hide();
       $(".modal").hide();
@@ -99,8 +99,6 @@ export default {
         resource: "vaultKeeps",
         data: this.newVaultKeep,
       });
-      $(".modal-backdrop").hide();
-      $(".modal").hide();
     },
   },
   components: {

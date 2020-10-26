@@ -93,6 +93,8 @@ export default {
         resource: "keeps",
         path: "keeps",
       });
+      $(".modal-backdrop").hide();
+      $(".modal").hide();
     },
     viewProfile() {
       this.$router.push({

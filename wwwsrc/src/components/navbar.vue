@@ -6,6 +6,7 @@
       </div>
     </router-link>
     <router-link
+      v-if="$auth.isAuthenticated"
       class="navbar-brand d-flex"
       :to="{ name: 'Profile', params: { Id: this.profile.id } }"
     >
