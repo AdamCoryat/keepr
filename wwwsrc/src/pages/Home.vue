@@ -1,9 +1,10 @@
 <template>
-  <main class="home cards container-fluid">
-    <section class="card-columns row justify-content-center">
-      <keep v-for="keep in keeps" :key="keep.id" :keep="keep" />
-    </section>
-    <section id="keep-modals"></section>
+  <main class="home container-fluid">
+    <div class="row justify-content-center">
+      <div class="card-columns cards text-center">
+        <keep v-for="keep in keeps" :key="keep.id" :keep="keep" />
+      </div>
+    </div>
   </main>
 </template>
 
@@ -21,8 +22,21 @@ export default {
     return {};
   },
   computed: {
+    profile() {
+      return this.$store.state.profile;
+    },
     keeps() {
       return this.$store.state.keeps;
+    },
+  },
+  watch: {
+    profile: function(userProfile) {
+      if (userProfile.picture) {
+        this.$store.dispatch("getResource", {
+          path: "profiles/" + this.profile.id + "/vaults",
+          resource: "vaults",
+        });
+      }
     },
   },
   methods: {},
@@ -33,6 +47,9 @@ export default {
 </script>
 
 <style scoped>
+.home {
+  height: 100vh;
+}
 .cards {
   display: inline-block;
 }

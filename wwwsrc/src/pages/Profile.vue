@@ -179,7 +179,7 @@ export default {
   methods: {
     createKeep() {
       this.$store.dispatch("create", {
-        getPath: "keeps",
+        getPath: "profiles/" + this.$route.params.Id + "/keeps",
         path: "keeps",
         resource: "keeps",
         data: this.newKeep,

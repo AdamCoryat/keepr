@@ -28,8 +28,8 @@ export default {
 @import "./assets/_variables.scss";
 @import "bootstrap";
 @import "./assets/_overrides.scss";
-.bg-clr {
+body {
+  min-height: 100%;
   background-color: #f7f7f8;
-  // background-image: linear-gradient(135deg, #fdfdfd 0%, #c6c9c9 100%);
 }
 </style>

@@ -75,7 +75,6 @@ export default new Vuex.Store({
           path: payload.path,
           resource: payload.resource,
         });
-        ns.toast("Deleted!", 2000, "success");
       } catch (error) {
         console.error(error);
       }

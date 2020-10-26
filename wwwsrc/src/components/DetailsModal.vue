@@ -5,7 +5,6 @@
         <div class="row">
           <slot name="body"></slot>
         </div>
-        <div class="modal-footer"></div>
       </div>
     </div>
   </main>
