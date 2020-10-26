@@ -77,18 +77,6 @@
                   id="footer-functions"
                 >
                   <hr />
-                  <select
-                    v-model="newVaultKeep.vaultId"
-                    @change="createVaultKeep()"
-                    class="custom-select"
-                  >
-                    <option
-                      :value="vault.id"
-                      v-for="vault in vaults"
-                      :key="vault.id"
-                      >{{ vault.name }}</option
-                    >
-                  </select>
                   <div class="dropdown">
                     <a
                       class="btn btn-secondary dropdown-toggle"
@@ -105,9 +93,10 @@
                     <div
                       class="dropdown-menu"
                       aria-labelledby="dropdownMenuLink"
-                      @change="createVaultKeep()"
                     >
                       <a
+                        href="#"
+                        @click="createVaultKeep(vault.id)"
                         class="dropdown-item"
                         :value="vault.id"
                         v-for="vault in vaults"
@@ -183,10 +172,11 @@ export default {
         params: { Id: this.keep.creator.id },
       });
     },
-    createVaultKeep() {
+    createVaultKeep(id) {
+      this.newVaultKeep.vaultId = id;
       this.newVaultKeep.keepId = this.keep.id;
       this.$store.dispatch("create", {
-        getPath: "vaults/" + this.newVaultKeep.vaultId + "/keeps",
+        getPath: "vaults/" + id + "/keeps",
         path: "vaultkeeps",
         resource: "vaultKeeps",
         data: this.newVaultKeep,
