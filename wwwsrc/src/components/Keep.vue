@@ -114,6 +114,7 @@
                     aria-hidden="true"
                   ></i>
                   <p class="">{{ keep.creator.name }}</p>
+                  <img class="creator-img" :src="keep.creator.picture" alt="" />
                 </div>
               </div>
             </div>
