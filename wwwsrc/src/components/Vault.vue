@@ -1,19 +1,10 @@
 <template>
-  <div class="vault  col-3">
-    <router-link
-      class="card vault-width"
-      :to="{ name: 'Vault', params: { Id: vault.id } }"
-    >
-      <div class="card-body">
-        <h4 class="card-title">{{ vault.name }}</h4>
-        <p class="card-text">{{ vault.description }}</p>
-        <button
-          type="button"
-          class="btn btn-danger"
-          @click="deleteVault(vault.id)"
-        >
-          delete
-        </button>
+  <div class="col-2">
+    <router-link :to="{ name: 'Vault', params: { Id: vault.id } }">
+      <div class="m-2 vault card neu-styling">
+        <div class="card-body text-center">
+          <h4 class="card-title">{{ vault.name }}</h4>
+        </div>
       </div>
     </router-link>
   </div>
@@ -29,21 +20,19 @@ export default {
     return {};
   },
   computed: {},
-  methods: {
-    deleteVault(id) {
-      this.$store.dispatch("delete", {
-        deletePath: "vaults/" + this.vault.id,
-        resource: "vaults",
-        path: "profiles/" + this.$route.params.Id + "/vaults",
-      });
-    },
-  },
+  methods: {},
   components: {},
 };
 </script>
 
 <style scoped>
+.vault {
+  border-radius: 12px;
+}
 .vault-width {
   min-width: 25vw;
+}
+.img-size {
+  width: 20vw;
 }
 </style>

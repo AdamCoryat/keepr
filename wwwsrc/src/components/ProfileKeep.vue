@@ -100,6 +100,7 @@
                     </div>
                   </div>
                   <i
+                    v-if="isCreator"
                     @click="deleteKeep(keep.id)"
                     data-dismiss="modal"
                     class="fa fa-trash-o trash-icon pointer mx-5"
@@ -139,8 +140,11 @@ export default {
     modalId() {
       return "a-" + this.keep.id.toString();
     },
-    profile() {
-      return this.$store.state.profile;
+    activeProfile() {
+      return this.$store.state.activeProfile;
+    },
+    isCreator() {
+      return this.$store.state.profile.id == this.keep.creatorId;
     },
   },
   methods: {
@@ -150,7 +154,7 @@ export default {
         resource: "activeKeep",
       });
       this.$store.dispatch("getResource", {
-        path: "profiles/" + this.profile.id + "/keeps",
+        path: "profiles/" + this.activeProfile.id + "/keeps",
         resource: "keeps",
       });
     },
@@ -163,16 +167,15 @@ export default {
       $(".modal-backdrop").hide();
       $(".modal").hide();
     },
-    createVaultKeep() {
+    createVaultKeep(id) {
+      this.newVaultKeep.vaultId = id;
       this.newVaultKeep.keepId = this.keep.id;
       this.$store.dispatch("create", {
-        getPath: "vaults/" + this.newVaultKeep.vaultId + "/keeps",
+        getPath: "vaults/" + id + "/keeps",
         path: "vaultkeeps",
         resource: "vaultKeeps",
         data: this.newVaultKeep,
       });
-      $(".modal-backdrop").hide();
-      $(".modal").hide();
     },
   },
   components: {

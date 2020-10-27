@@ -4,6 +4,13 @@
       <article id="vault-header" class="col-12">
         <h1>{{ vault.name }}</h1>
         <p>Keeps: {{ keeps.length }}</p>
+        <button
+          type="button"
+          class="btn btn-danger"
+          @click="deleteVault(vault.id)"
+        >
+          delete
+        </button>
       </article>
     </section>
     <section class="row d-flex justify-content-center">
@@ -66,7 +73,15 @@ export default {
       }
     },
   },
-  methods: {},
+  methods: {
+    deleteVault(id) {
+      this.$store.dispatch("delete", {
+        deletePath: "vaults/" + this.vault.id,
+        resource: "vaults",
+        path: "profiles/" + this.$route.params.Id + "/vaults",
+      });
+    },
+  },
   components: {
     VaultKeep,
   },

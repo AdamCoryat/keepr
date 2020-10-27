@@ -107,6 +107,7 @@
                     </div>
                   </div>
                   <i
+                    v-if="isCreator"
                     @click="deleteKeep(keep.id)"
                     data-dismiss="modal"
                     class="fa fa-trash-o trash-icon pointer mx-5"
@@ -146,6 +147,9 @@ export default {
     },
     modalId() {
       return "a-" + this.keep.id.toString();
+    },
+    isCreator() {
+      return this.$store.state.profile.id == this.keep.creatorId;
     },
   },
   methods: {

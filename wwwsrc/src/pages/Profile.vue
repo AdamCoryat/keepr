@@ -16,7 +16,7 @@
 
       <section id="profile-vaults" class="row">
         <article class="col-12">
-          <h3>
+          <h3 class="m-2">
             Vaults
             <i
               class="fa fa-plus pointer"
@@ -25,14 +25,12 @@
             ></i>
           </h3>
         </article>
-        <article class="row">
-          <vault v-for="vault in vaults" :key="vault.id" :vault="vault" />
-        </article>
+        <vault v-for="vault in vaults" :key="vault.id" :vault="vault" />
       </section>
 
       <section id="profile-keeps" class="row">
-        <article class="col-12">
-          <h3>
+        <article class="col-12 bg-trans">
+          <h3 class="m-2">
             Keeps
             <i
               class="fa fa-plus pointer"
@@ -148,10 +146,6 @@ export default {
       resource: "activeProfile",
     });
     this.$store.dispatch("getResource", {
-      path: "profiles/" + this.$route.params.Id + "/vaults",
-      resource: "vaults",
-    });
-    this.$store.dispatch("getResource", {
       path: "profiles/" + this.$route.params.Id + "/keeps",
       resource: "keeps",
     });
@@ -161,6 +155,16 @@ export default {
       newKeep: {},
       newVault: {},
     };
+  },
+  watch: {
+    profile: function(userProfile) {
+      if (userProfile.picture) {
+        this.$store.dispatch("getResource", {
+          path: "profiles/" + this.$route.params.Id + "/vaults",
+          resource: "vaults",
+        });
+      }
+    },
   },
   computed: {
     user() {
