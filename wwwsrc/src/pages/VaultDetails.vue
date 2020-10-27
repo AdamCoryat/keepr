@@ -5,6 +5,7 @@
         <h1>{{ vault.name }}</h1>
         <p>Keeps: {{ keeps.length }}</p>
         <button
+          v-if="isCreator"
           type="button"
           class="btn btn-danger"
           @click="deleteVault(vault.id)"
@@ -53,6 +54,9 @@ export default {
     },
     vault() {
       return this.$store.state.activeVault;
+    },
+    isCreator() {
+      return this.$store.state.profile.id == this.vault.creatorId;
     },
   },
   watch: {
