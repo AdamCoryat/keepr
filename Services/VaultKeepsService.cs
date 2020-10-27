@@ -7,15 +7,22 @@ namespace Keepr.Services
     public class VaultKeepsService
     {
       private readonly VaultKeepsRepository _repo;
+      private readonly VaultsRepository _vRepo;
 
-    public VaultKeepsService(VaultKeepsRepository repo)
+    public VaultKeepsService(VaultKeepsRepository repo, VaultsRepository vRepo)
     {
       _repo = repo;
+      _vRepo = vRepo;
     }
 
     internal VaultKeep Create(Profile userInfo, VaultKeep newVaultKeep)
     {
       newVaultKeep.Id = _repo.Create(newVaultKeep);
+      Vault vault = _vRepo.GetById(newVaultKeep.VaultId);
+      if(vault.CreatorId != userInfo.Id)
+      {
+        throw new Exception("You do not own this Vault");
+      }
       return newVaultKeep;
     }
 

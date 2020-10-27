@@ -18,13 +18,13 @@ namespace Keepr.Services
     internal Vault GetById(Profile userInfo, int id)
     {
       Vault data = _repo.GetById(id);
-      if(data.IsPrivate == true && data.CreatorId != userInfo.Id)
-      {
-        throw new Exception("This Vault is private");
-      }
       if(data == null)
       {
         throw new Exception("Invalid Id");
+      }
+      if(data.IsPrivate == true && data.CreatorId != userInfo.Id)
+      {
+        throw new Exception("This Vault is private");
       }
       return data;
     }

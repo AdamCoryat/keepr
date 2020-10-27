@@ -97,6 +97,7 @@
                       <a
                         href="#"
                         @click="createVaultKeep(vault.id)"
+                        data-dismiss="modal"
                         class="dropdown-item"
                         :value="vault.id"
                         v-for="vault in vaults"

@@ -8,8 +8,7 @@
 --   picture VARCHAR(255),
 --   PRIMARY KEY(id)
 -- )
-
--- SELECT * FROM vaultkeeps
+SELECT * FROM vaultkeeps
 -- DROP TABLE keeps
 
 -- CREATE TABLE keeps
