@@ -1,55 +1,112 @@
 <template>
-  <main class="profile-keep col-3">
-    <a href="" data-toggle="modal" :data-target="keepId" @click="addView">
-      <div
-        id="profile-keep"
-        class="card neu-styling m-2 d-flex flex-wrap justify-content-end justify-content-between align-items-between"
-        v-bind:style="{ backgroundImage: 'url(' + this.keep.img + ')' }"
-      >
-        <div class="">
-          <h4>
-            {{ keep.name }}
-          </h4>
-        </div>
+  <main class="profile-keep">
+    <section
+      class="zoom-in m-2 card keep-body neu-styling"
+      data-toggle="modal"
+      :data-target="keepId"
+      @click="addView"
+    >
+      <img class="card-img-top keep-img" :src="this.keep.img" alt="" />
+      <div class="bottom-left">
+        <h4 class="shadow">{{ keep.name }}</h4>
       </div>
-    </a>
+      <div class="bottom-right"></div>
+    </section>
     <section id="profile-keep-modal">
       <details-modal :id="modalId">
         <template v-slot:body>
           <div class="row modal-width">
-            <div class="col-4">
-              <img :src="keep.img" class="card-img" />
+            <div
+              class="text-center flex-wrap align-items-center modal-img col-7"
+            >
+              <img :src="keep.img" class="m-1 card-img" />
             </div>
-            <div class="col-8">
+            <div class="col-5">
               <div class="card-body">
-                <p>
-                  Shares:{{ keep.shares }},Views:{{ keep.views }},Keeps:{{
-                    keep.keeps
-                  }}
-                </p>
-                <button @click="deleteKeep(keep.id)" data-dismiss="modal">
-                  delete
-                </button>
-                <div>
-                  <select
-                    v-model="newVaultKeep.vaultId"
-                    @change="createVaultKeep()"
-                    class="custom-select"
-                  >
-                    <option
-                      :value="vault.id"
-                      v-for="vault in vaults"
-                      :key="vault.id"
-                      >{{ vault.name }}</option
+                <div id="stat-tracking" class="text-center">
+                  <p class="text-right">
+                    <i
+                      class="fa fa-times exit-icon pointer"
+                      aria-hidden="true"
+                      data-dismiss="modal"
+                    ></i>
+                  </p>
+                  <p>
+                    <span>
+                      <i
+                        class="fa fa-eye m-1 counter-icon"
+                        aria-hidden="true"
+                      ></i
+                      >{{ keep.views }}
+                    </span>
+
+                    <span class="mx-5">
+                      <i
+                        class="fa fa-hdd-o m-1 counter-icon"
+                        aria-hidden="true"
+                      ></i
+                      >{{ keep.keeps }}
+                    </span>
+
+                    <span class="mx-2"
+                      ><i
+                        class="fa fa-share-alt m-1 counter-icon"
+                        aria-hidden="true"
+                      ></i
+                      >{{ keep.shares }}</span
                     >
-                  </select>
+                  </p>
                 </div>
-                <hr />
-                <h5 class="card-title">{{ keep.name }}</h5>
-                <br />
-                <p class="card-text">{{ keep.description }}</p>
-                <hr />
-                <p class="card-text">{{ keep.creator.name }}</p>
+                <div id="modal-title">
+                  <h2 class="card-title">{{ keep.name }}</h2>
+                  <hr />
+                </div>
+                <div id="modal-description">
+                  <br />
+                  <p class="card-text">{{ keep.description }}</p>
+                </div>
+                <div
+                  class="d-flex justify-content-between"
+                  id="footer-functions"
+                >
+                  <hr />
+                  <div class="dropdown">
+                    <a
+                      class="btn btn-secondary dropdown-toggle"
+                      href="#"
+                      role="button"
+                      id="dropdownMenuLink"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      Add to Vault
+                    </a>
+
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuLink"
+                    >
+                      <a
+                        href="#"
+                        @click="createVaultKeep(vault.id)"
+                        data-dismiss="modal"
+                        class="dropdown-item"
+                        :value="vault.id"
+                        v-for="vault in vaults"
+                        :key="vault.id"
+                        >{{ vault.name }}</a
+                      >
+                    </div>
+                  </div>
+                  <i
+                    @click="deleteKeep(keep.id)"
+                    data-dismiss="modal"
+                    class="fa fa-trash-o trash-icon pointer mx-5"
+                    aria-hidden="true"
+                  ></i>
+                  <p class="">{{ keep.creator.name }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -82,14 +139,18 @@ export default {
     modalId() {
       return "a-" + this.keep.id.toString();
     },
+    profile() {
+      return this.$store.state.profile;
+    },
   },
   methods: {
     addView() {
-      this.keep.views++;
-      this.$store.dispatch("edit", {
-        getPath: "keeps",
+      this.$store.dispatch("getResource", {
         path: "keeps/" + this.keep.id,
-        data: this.keep,
+        resource: "activeKeep",
+      });
+      this.$store.dispatch("getResource", {
+        path: "profiles/" + this.profile.id + "/keeps",
         resource: "keeps",
       });
     },
@@ -103,13 +164,6 @@ export default {
       $(".modal").hide();
     },
     createVaultKeep() {
-      this.keep.keeps++;
-      this.$store.dispatch("edit", {
-        getPath: "keeps",
-        path: "keeps/" + this.keep.id,
-        data: this.keep,
-        resource: "keeps",
-      });
       this.newVaultKeep.keepId = this.keep.id;
       this.$store.dispatch("create", {
         getPath: "vaults/" + this.newVaultKeep.vaultId + "/keeps",
@@ -127,26 +181,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.modal-img {
-  width: 40vw;
-}
-.modal-width {
-  width: 70vw;
-}
-.neu-styling {
-  box-shadow: 10px 10px 20px #acacad;
-  /* border: 1px solid rgba(255, 255, 255, 0.2); */
-  border-radius: 12px;
-  min-height: 50vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-/* .keep {
-  transition: 0.5s ease;
-}
-.keep:hover {
-  transform: scale(1.05);
-} */
-</style>
+<style scoped></style>

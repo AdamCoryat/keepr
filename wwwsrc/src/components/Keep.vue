@@ -150,11 +150,12 @@ export default {
   },
   methods: {
     addView() {
-      this.keep.views++;
-      this.$store.dispatch("edit", {
-        getPath: "keeps",
+      this.$store.dispatch("getResource", {
         path: "keeps/" + this.keep.id,
-        data: this.keep,
+        resource: "activeKeep",
+      });
+      this.$store.dispatch("getResource", {
+        path: "keeps",
         resource: "keeps",
       });
     },
@@ -190,58 +191,4 @@ export default {
 };
 </script>
 
-<style scoped>
-#modal-description {
-  min-height: 30vh;
-}
-#footer-functions {
-  position: absolute;
-  bottom: 10px;
-}
-.modal-img {
-  width: 40vw;
-}
-.modal-width {
-  width: 70vw;
-}
-
-.neu-styling {
-  box-shadow: 10px 10px 20px #acacad;
-}
-.user-icon {
-  color: rgb(156, 243, 236);
-  font-size: 2.5em;
-}
-.trash-icon {
-  color: grey;
-  font-size: 2.5em;
-}
-.keep-img {
-  border-radius: 12px;
-}
-.keep-body {
-  max-width: 30vw;
-  position: relative;
-  text-align: center;
-  color: white;
-  border-radius: 12px;
-}
-.bottom-left {
-  position: absolute;
-  bottom: 8px;
-  left: 16px;
-}
-.bottom-right {
-  position: absolute;
-  bottom: 8px;
-  right: 16px;
-}
-.counter-icon {
-  color: rgb(156, 243, 236);
-  font-size: 1.5em;
-}
-.exit-icon {
-  color: red;
-  font-size: 1.5em;
-}
-</style>
+<style scoped></style>

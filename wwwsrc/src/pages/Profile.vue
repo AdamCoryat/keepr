@@ -41,7 +41,7 @@
             ></i>
           </h3>
         </article>
-        <article class="row card-columns">
+        <article class="card-columns">
           <profile-keep v-for="keep in keeps" :key="keep.id" :keep="keep" />
         </article>
       </section>

@@ -26,7 +26,9 @@ namespace Keepr.Services
       {
         throw new Exception("Invalid Id");
       }
-      return data;
+      data.Views++;
+      Keep incremented = _repo.Edit(data);
+      return incremented;
     }
 
     internal IEnumerable<Keep> GetKeepsByProfileId(string userId, string profileId)

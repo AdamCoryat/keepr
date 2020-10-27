@@ -8,11 +8,13 @@ namespace Keepr.Services
     {
       private readonly VaultKeepsRepository _repo;
       private readonly VaultsRepository _vRepo;
+      private readonly KeepsRepository _kRepo;
 
-    public VaultKeepsService(VaultKeepsRepository repo, VaultsRepository vRepo)
+    public VaultKeepsService(VaultKeepsRepository repo, VaultsRepository vRepo, KeepsRepository kRepo)
     {
       _repo = repo;
       _vRepo = vRepo;
+      _kRepo = kRepo;
     }
 
     internal VaultKeep Create(Profile userInfo, VaultKeep newVaultKeep)
@@ -23,6 +25,9 @@ namespace Keepr.Services
       {
         throw new Exception("You do not own this Vault");
       }
+      Keep data = _kRepo.GetById(newVaultKeep.KeepId);
+      data.Keeps++;
+      _kRepo.Edit(data);
       return newVaultKeep;
     }
 

@@ -91,10 +91,10 @@ You have been provided the following Figma to provide you the general layout. Wh
 - [X]Create and Delete Keeps
 - [X]Create and Delete Vaults
 - [X]Users can only Delete **things they created**
-- []All deletes require confirmation
+- [X]All deletes require confirmation
 - [X]Add `keeps` to `vault`s
 - [X]Remove `keeps` from `vault`s
-- []All API Tests pass
+- [X]All API Tests pass
 
 ### Finished?
 
