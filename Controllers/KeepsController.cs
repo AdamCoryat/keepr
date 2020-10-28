@@ -70,8 +70,6 @@ namespace Keepr.Controllers
       try
       {
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-        editKeep.CreatorId = userInfo.Id;
-        editKeep.Creator = userInfo;
         editKeep.Id = id; 
         return Ok(_ks.Edit(editKeep, userInfo.Id));
       }

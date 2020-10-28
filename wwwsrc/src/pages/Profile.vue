@@ -3,7 +3,7 @@
     <div v-if="profile.name">
       <section class="row">
         <article id="profile-picture" class="col-2 text-center">
-          <img class="m-2" :src="profile.picture" alt="" />
+          <img class="m-2 profile-picture" :src="profile.picture" alt="" />
         </article>
         <article id="profile-info" class="col-10 text-left">
           <div>
@@ -16,9 +16,11 @@
 
       <section id="profile-vaults" class="row">
         <article class="col-12">
+          <hr />
           <h3 class="m-2">
             Vaults
             <i
+              v-if="isCreator"
               class="fa fa-plus pointer"
               data-toggle="modal"
               data-target="#vaultCreate"
@@ -33,6 +35,7 @@
           <h3 class="m-2">
             Keeps
             <i
+              v-if="isCreator"
               class="fa fa-plus pointer"
               data-toggle="modal"
               data-target="#keepCreate"
@@ -149,6 +152,10 @@ export default {
       path: "profiles/" + this.$route.params.Id + "/keeps",
       resource: "keeps",
     });
+    this.$store.dispatch("getResource", {
+      path: "profiles/" + this.$route.params.Id + "/vaults",
+      resource: "vaults",
+    });
   },
   data() {
     return {
@@ -178,6 +185,9 @@ export default {
     },
     vaults() {
       return this.$store.state.vaults;
+    },
+    isCreator() {
+      return this.$store.state.profile.id == this.profile.id;
     },
   },
   methods: {
@@ -210,4 +220,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.profile-picture {
+  width: 10vw;
+}
+</style>

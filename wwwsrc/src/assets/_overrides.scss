@@ -27,6 +27,16 @@
   border: 1px solid rgba(0, 0, 0, 0.924);
 }
 
+.keep-img {
+  border-radius: 12px;
+}
+.keep-body {
+  max-width: 30vw;
+  position: relative;
+  text-align: center;
+  color: white;
+  border-radius: 12px;
+}
 //SECTION keep modal CSS
 .counter-icon {
   color: rgb(156, 243, 236);
@@ -56,16 +66,6 @@
 }
 .modal-width {
   width: 70vw;
-}
-.keep-img {
-  border-radius: 12px;
-}
-.keep-body {
-  max-width: 30vw;
-  position: relative;
-  text-align: center;
-  color: white;
-  border-radius: 12px;
 }
 .creator-img {
   width: 2vw;

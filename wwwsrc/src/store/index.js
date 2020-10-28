@@ -51,7 +51,6 @@ export default new Vuex.Store({
           path: payload.getPath,
           resource: payload.resource,
         });
-        ns.toast("Created!", 2000, "success");
       } catch (error) {
         console.error(error);
       }
@@ -69,12 +68,14 @@ export default new Vuex.Store({
     },
     async delete({ dispatch }, payload) {
       try {
-        if (await ns.confirmAction("do you want to delete?"))
+        if (await ns.confirmAction("do you want to delete?")) {
           await api.delete(payload.deletePath);
-        dispatch("getResource", {
-          path: payload.path,
-          resource: payload.resource,
-        });
+          dispatch("getResource", {
+            path: payload.path,
+            resource: payload.resource,
+          });
+          ns.toast("Deleted!", 2000, "success");
+        }
       } catch (error) {
         console.error(error);
       }

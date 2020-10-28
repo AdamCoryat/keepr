@@ -11,7 +11,7 @@
         <h4 class="shadow">{{ keep.name }}</h4>
       </div>
       <div class="bottom-right">
-        <a v-on:click.stop.prevent="viewProfile">
+        <a @click.stop.prevent="viewProfile">
           <i
             class="fa fa-user-circle-o pointer user-icon"
             aria-hidden="true"
