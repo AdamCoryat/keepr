@@ -1,7 +1,11 @@
 import Axios from "axios";
+
+let baseUrl = window.location.origin.includes("localhost")
+  ? "https://localhost:5001/api/"
+  : "/api";
 export const api = Axios.create({
-  baseURL: "https://localhost:5001/api/",
-  timeout: 3000
+  baseURL: baseUrl,
+  timeout: 3000,
 });
 
 export const setBearer = function(bearer) {
