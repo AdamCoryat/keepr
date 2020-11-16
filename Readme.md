@@ -16,7 +16,3 @@ I created this application as a clone or mock of a pintrest website where the us
 
 
 This application is still in progress but will be finished soon!
-
-
-
-![reference](./References.png)
