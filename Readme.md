@@ -2,105 +2,21 @@
 
 <img class="img-responsive" src="https://images.unsplash.com/photo-1462045504115-6c1d931f07d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80">
 
-Keepr is a social network that allows users to visually share and discover new interests by posting images or videos that can be "kept" in a collection by those who like the content.
+I created this application as a clone or mock of a pintrest website where the user can share pictures of some of there favorite things. This application was built with Vue2 fore the client side as well as .Net for the server side. Listed below is the features that are provided in this Application. 
 
-> A collection(`vault`) of posts(`keeps`) with a common theme.
+- The user can view all the cards on the home page with out loggin in
+- The user can click on the card image and see more details about the card as well as the creator name, the amount of times that image has been saved, the amount   of times that image has been viewed, and if you are the creator of that card you can edit or delete the card.
+- The user can click on the authors icon on the bottom right of the image and the application will navigate them to that users profile. You can view that users     public vaults as well as that users other card images they have posted.
+- The user can select the current profiles vaults and view all of the images that have been saved to them.
+- The user can select the images in the current profiles vault and add that image to there collection if they are logged in.
+- The user can view there profile page and create vaults and image cards or (keeps)
+- The user can delete and edit card images in there profile as well as delete vaults.
+- All deletes require a confirmation before being excuted.
+- The user can create a vault and mark it public or private. Only that user can view there private vaults. 
 
-Users can view the profiles of other users to see
 
-- The users name and profile image
-- Their public collection of `vaults`
-- `Keeps` the user has created
+This application is still in progress but will be finished soon!
 
-### Goals
 
-In this checkpoint students will demonstrate a working knowledge of building full-stack applications. They will utilize a VueJs frontend implementing Vuex and Vue-Router to manage the DOM. On the server side students will use a DotNet WebApi for their server, implementing the Repository pattern to communicate with their MySql database. In addition students will use Auth0 for user management and Dapper as an ORM.
 
-### The Concepts
-
-Keepr is a typical project where some of the basic layouts have been thought up and the data objects determined. However, implementation of this code is yet to be done. The basic idea is users can browse all of the items (aka `Keeps`) that have been posted without having to login, and post items if they are logged in. If any user wants to store a reference to any particular keep they will store it in the `vault` of their choice. Users can have many vaults, and vaults can be set as public or private.
-
-When a user clicks on a keep from the main page the `keep` should be opened up in a more detailed view (i.e. modal see Mock) where they can then choose to add it to one of their `vault`s.
-
-Vaults themselves are relatively straight forward. They only require a `Name`, `Description`, and `IsPrivate` properties. This object will then be used as a part of a relationship to find all the `keep`s that have been added to it.
-
-For example I may really like game art and thus:
-
-> As a user I can create a `vault` named **_Sweet Game Art_** so that I can have a collection to store the `keep`s I like.
-
-Lastly I can view other members profiles to see all the `vault`s and `keep`s they have created _(only the public vaults of other users)_, and look at the `keep`s in each of their `vault`s.
-
-### Where is the data?
-
-To get started you are going to need to create some models and think about the necessary relationships. You will need to manage the users `profile`, `keep`s, `vault`s and `vaultkeep`s you will also need at least 1 view model for getting keeps by vaultId.
-
-Users will be allowed to create `vault`s where they can organize the posts(`keep`s) of other users so they can recall the `keep`s they enjoy by looking at that particular `vault`.
-
-In addition to creating and deleting `keep`s and `vault`s, users can add and remove `keep`s from their `vault`s
-
-A single user can have many `vault`s but each `vault` will only belong to a single user.
-
-> See references below for the UML diagram breaking down properties and relationships for these models.
-
-### Business Rules and Functionality
-
-We want give users some credit for creating excellent `keep`s to do that you will want to set up a way to keep track of the number of times a keep has been viewed, and how many times it has been added to any vault. (as a stretch goal, when it is removed this count should be updated to go down as well).
-
-Due to the privacy of our users, Vaults marked private may only be retrieved by the user who created the vault, there are a few places you will want to make a check on what vaults should be returned.
-
-### Adhering to the Mock
-
-You have been provided the following Figma to provide you the general layout. While this is not strictly required, consider that many of the design descisions (rounded corners, page layout, masonry) are all very much in line with modern design principals. While you are free to alter the theme, strict adherence to the layouts depicted in the mocks is manditory.
-
-- [Figma Document](https://www.figma.com/file/Uui3335TxIEXWzgp4xrX9r/Keepr?node-id=0%3A1)
-- [Figma Prototype](https://www.figma.com/proto/Uui3335TxIEXWzgp4xrX9r/Keepr?node-id=1%3A53&scaling=min-zoom)
-
-### BONUS Ideas - Sharing the fun
-
-- `Keep`s should be tagged, allowing users find keeps by tag
-- Users can create custom tags
-- Tags are not duplicated (Games,games,GAMES)
-- Write a few tests for your components 80/20.
-- Implement pagination or infinite scroll
-- Users can extend their profile to include a bio, ect...
-
-# Requirements
-
--[X]`Keep` cards are displayed in accordance to mock -[X]Visitors can see all `keep`s (login not required) -[X]A `keep` card includes image, title, creator avatar -[X]Clicking on the creator avatar navigates to the creators profile page _(stop propagate)_ -[X]Cards follow a mansonry layout _(bootstrap card columns OR masonry)_
-
-- [X]Clicking on a `keep` card opens the `keep` in a modal which adheres to mock
-  - [X]Keep Count -[X]View Count
-  - [X]Keep Description
-  - [X]Keep Title
-  - [X]Keep Creator name and avatar
-  - [X]Keep Image
-  - [X]Add to vault functionality
-- [X]All users have a public profile page
-- [X]The profile page adheres to mock:
-  - [X]**Public** vaults
-  - [X]**Private** vaults if it is their own page
-  - [X]Keeps created by that user
-  - [X]Total `keep`s count
-  - [X]Total public `vault`s count
-  - [X]The users name and avatar
-- [X]Each `vault` has its own route where users can view all of the `keeps` in the vault
-- [X]On the `vault` page, if the `vault` is private and not the active users the request fails
-- [X]From the `vault` page if the user is the creator they can remove `keep`s from the `vault`
-- [X]Anytime a `keep` is `kept in a vault` the keep count is incremented
-- [X]Users can Register, login and automatically authenticated on refresh
-- [X]Create and Delete Keeps
-- [X]Create and Delete Vaults
-- [X]Users can only Delete **things they created**
-- [X]All deletes require confirmation
-- [X]Add `keeps` to `vault`s
-- [X]Remove `keeps` from `vault`s
-- [X]All API Tests pass
-
-### Finished?
-
-> Make sure you test it. When You are finished submit your project to the gradebook and notify your instructor
-
----
-
-**_UML Reference_**
 ![reference](./References.png)
