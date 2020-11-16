@@ -1,4 +1,6 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/2e020307c7d058c30fc6/maintainability)](https://codeclimate.com/github/AdamCoryat/keepr/maintainability)
 ## Keepr
+
 
 <img class="img-responsive" src="https://images.unsplash.com/photo-1462045504115-6c1d931f07d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80">
 
