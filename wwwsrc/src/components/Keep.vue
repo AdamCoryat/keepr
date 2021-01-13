@@ -12,11 +12,7 @@
       </div>
       <div class="bottom-right">
         <a @click.stop.prevent="viewProfile">
-          <i
-            class="fa fa-user-circle-o pointer user-icon"
-            aria-hidden="true"
-          ></i
-        ></a>
+          <img class="user-icon" :src="this.keep.creator.picture" alt=""></a>
       </div>
     </section>
     <section id="keep-modal">
@@ -196,4 +192,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

@@ -5,9 +5,9 @@ using Keepr.Repositories;
 
 namespace Keepr.Services
 {
-    public class KeepsService
-    {
-        private readonly KeepsRepository _repo;
+  public class KeepsService
+  {
+    private readonly KeepsRepository _repo;
 
     public KeepsService(KeepsRepository repo)
     {
@@ -22,7 +22,7 @@ namespace Keepr.Services
     internal Keep GetById(int id)
     {
       Keep data = _repo.GetById(id);
-      if(data == null)
+      if (data == null)
       {
         throw new Exception("Invalid Id");
       }
@@ -34,7 +34,7 @@ namespace Keepr.Services
     internal IEnumerable<Keep> GetKeepsByProfileId(string userId, string profileId)
     {
       IEnumerable<Keep> keeps = _repo.GetKeepsByProfileId(profileId);
-      if(keeps == null)
+      if (keeps == null)
       {
         throw new Exception("Invalid Id");
       }
@@ -54,11 +54,11 @@ namespace Keepr.Services
     internal object Edit(Keep editKeep, string creatorId)
     {
       Keep data = _repo.GetById(editKeep.Id);
-      if(data == null)
+      if (data == null)
       {
         throw new Exception("Invalid Id");
       }
-      if(data.CreatorId != creatorId)
+      if (data.CreatorId != creatorId)
       {
         throw new Exception("Denied Invalid Permissions");
       }
@@ -68,20 +68,20 @@ namespace Keepr.Services
       return _repo.Edit(editKeep);
     }
 
-    
+
 
     internal object Delete(int id, string creatorId)
     {
       Keep data = _repo.GetById(id);
-      if(data == null)
+      if (data == null)
       {
         throw new Exception("Invalid Id");
       }
-      if(data.CreatorId != creatorId)
-      {
-        throw new Exception("Denied Invalid Permissions");
-      }
-       _repo.Delete(id);
+      // if(data.CreatorId != creatorId)
+      // {
+      //   throw new Exception("Denied Invalid Permissions");
+      // }
+      _repo.Delete(id);
       return "Successfully Deleted!";
     }
   }
