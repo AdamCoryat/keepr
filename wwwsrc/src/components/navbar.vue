@@ -1,8 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-secondary shadow">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
+    <i class="fa fa-grav logo-navbar mx-2" aria-hidden="true"></i>
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <h1 class="border border-primary">Home</h1>
+        <h1 class="">Home</h1>
       </div>
     </router-link>
     <router-link
@@ -11,7 +12,7 @@
       :to="{ name: 'Profile', params: { Id: this.profile.id } }"
     >
       <div class="d-flex flex-column align-items-center">
-        <h1 class="border border-primary">Profile</h1>
+        <h1 class="">Profile</h1>
       </div>
     </router-link>
     <button
@@ -25,7 +26,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
+    <div class="collapse navbar-collapse justify-content-end" id="navbarText">
       <span class="navbar-text">
         <!-- Consider changing this to a profile picture -->
         <button
