@@ -11,6 +11,7 @@
       class="navbar-brand d-flex"
       :to="{ name: 'Profile', params: { Id: this.profile.id } }"
     >
+    
       <div class="d-flex flex-column align-items-center">
         <h1 class="">Profile</h1>
       </div>
